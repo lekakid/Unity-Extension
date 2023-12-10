@@ -17,7 +17,9 @@ namespace LeKAKiD.List {
             }
         }
 
-        public static T Pop<T>(this IList<T> list, int index = 0) {
+        public static T Pop<T>(this IList<T> list, int index = -1) {
+            if (index == -1) index = list.Count - 1;
+
             T result = list[index];
             list.RemoveAt(index);
 
