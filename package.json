@@ -1,0 +1,10 @@
+{
+    "name": "com.lekakid.unity-extension",
+    "version": "1.0.0",
+    "displayName": "LeKAKiD Unity Extension",
+    "description": "Collection of Utility Class",
+    "author": {
+        "name": "LeKAKiD",
+        "url": "https://github.com/lekakid"
+    }
+}
