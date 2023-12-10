@@ -29,5 +29,9 @@ namespace LeKAKiD.List {
 
             return result;
         }
+
+        public static string Join<T>(this IList<T> list, string seperator = ", ") {
+            return string.Join(seperator, list);
+        }
     }
 }
