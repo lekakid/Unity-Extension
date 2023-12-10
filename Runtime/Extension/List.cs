@@ -16,5 +16,12 @@ namespace LeKAKiD.List {
                 list[n] = value;
             }
         }
+
+        public static T Pop<T>(this IList<T> list, int index = 0) {
+            T result = list[index];
+            list.RemoveAt(index);
+
+            return result;
+        }
     }
 }
