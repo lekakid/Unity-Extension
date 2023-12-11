@@ -1,28 +1,41 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections;
+using System.Collections.Generic;
 using System.Linq;
-using UnityEngine;
+using Random = UnityEngine.Random;
 
 namespace LeKAKiD.Picker {
-    public class Picker<T> {
-        class Item {
-            public T Value;
-            public int Weight;
+    public class Picker<T> : IEnumerable<(T, int)> {
+        private readonly List<(T Value, int Weight)> table = new List<(T Value, int Weight)>();
 
-            public Item(T value, int weight) {
-                Value = value;
-                Weight = weight;
+        public Picker() { }
+
+        public Picker(IEnumerable<T> collection) {
+            var enumerator = collection.GetEnumerator();
+            while (enumerator.MoveNext()) {
+                Add(enumerator.Current, 1);
             }
         }
 
-        List<Item> table = new List<Item>();
+        public IEnumerator<(T, int)> GetEnumerator() {
+            return table.GetEnumerator();
+        }
 
-        public void Add(T value, int weight = 1) {
-            table.Add(new Item(value, weight));
+        IEnumerator IEnumerable.GetEnumerator() {
+            return GetEnumerator();
+        }
+
+        public override string ToString() {
+            return string.Join(", ", table);
+        }
+
+        public void Add(T value, int weight) {
+            table.Add((value, weight));
         }
 
         public T Pick() {
             if (!(table.Count > 0)) {
-                throw new System.Exception("Empty List");
+                throw new Exception("Empty List");
             }
 
             int weightSum = table.Sum((item) => item.Weight);
@@ -41,4 +54,3 @@ namespace LeKAKiD.Picker {
         }
     }
 }
-
